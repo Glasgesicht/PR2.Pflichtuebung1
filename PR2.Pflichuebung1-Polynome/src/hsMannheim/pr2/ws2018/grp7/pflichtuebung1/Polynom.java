@@ -37,7 +37,6 @@ public class Polynom {
 	}
 
 	// Prüft, ob ein bestimmter koefffizient positiv, oder negativ ist.
-	// UNTESTED!!!!
 	public boolean isPositive(int grad) {
 
 		return (getKoeffizient(grad) >= 0) ? true : false;
