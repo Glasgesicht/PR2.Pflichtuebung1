@@ -122,7 +122,7 @@ public class Polynom {
 			ergebnis[i] = zwischenergebnis;
 		}
 		
-		return ergebnis;
+		return ergebnis; //test
 	}
 
 	/* Elvis Herdbrand */
