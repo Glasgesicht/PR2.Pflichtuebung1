@@ -97,7 +97,7 @@ public class Polynom {
 			}
 		}
 		if(isNullpolynom)
-			ausgabe = ausgabe + "0";
+			return "0";
 		return ausgabe;
 	}
 	
@@ -169,8 +169,8 @@ public class Polynom {
 		 nullpolynom.print();
 
 		System.out.println("Berechne Ergebnisse");
-		Polynom eins = new Polynom(1, 1, 1, 1, 1);
-		for (double i : eins.berechne(10, 1)) {
+		Polynom eins = new Polynom(5, 0, -2, 0, 9.5 , -8, 5);
+		for (double i : eins.berechne(1, -1, 5,-5)) {
 			System.out.println("" + i);
 		}
 	}
