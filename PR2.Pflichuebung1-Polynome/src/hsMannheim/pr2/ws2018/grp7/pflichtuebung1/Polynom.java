@@ -54,7 +54,7 @@ public class Polynom {
 
 	public boolean equals(Polynom a, Polynom b) {
 
-		Polynom test = subtrahiere(a, b);
+		Polynom test = subtrahiere( b);
 		double[] polynom = test.getKoeffizienten();
 
 		for (double i : polynom) {
@@ -130,14 +130,53 @@ public class Polynom {
 	}
 
 	/* Elvis Herdbrand */
-	public Polynom addiere(Polynom a, Polynom b) {
-		Polynom ergebnis = new Polynom();
-		return ergebnis;
+
+	// private Polynom addierer(Polynom a, Polynom b) {
+
+	// return this;
+	// }
+
+	private int addierer(int a, Polynom b, Polynom c) {
+
+		if (a <= 0) {
+
+			for (int i = a - 1; i >= 0; i--) {
+				if (this.getGrad() == i) {
+					c.koeffizient[this.getGrad()] = this.koeffizient[this.getGrad()] + b.koeffizient[i];
+				}
+
+			}
+			addierer(a - 1, b, c);
+		}
+		return 0;
 	}
 
-	public Polynom subtrahiere(Polynom a, Polynom b) {
-		Polynom ergebnis = new Polynom();
-		return ergebnis;
+	public Polynom addiere(Polynom b) {
+		Polynom ergebnisAddition = new Polynom();
+
+		this.addierer(b.grad, b, ergebnisAddition);
+
+		// legacy code
+		// for (int j = this.getGrad() - 1; j >= 0; j--) {
+		// for (int i = a.getGrad() - 1; i >= 0; i--) {
+		// if (this.getGrad() == i) {
+		// ergebnis.koeffizient[this.getGrad()] = this.koeffizient[this.getGrad()] +
+		// a.koeffizient[i];
+		// }
+		// }
+		// }
+		return ergebnisAddition;
+	}
+
+	public Polynom subtrahiere( Polynom b) {
+		Polynom ergebnisSubtraktion = new Polynom();
+		
+		for(int i = b.getGrad() - 1; i >= 0; i--) 
+		{b.koeffizient[i] = b.koeffizient[i]*(-1);}
+		
+		this.addierer(b.grad, b, ergebnisSubtraktion);
+		
+		return ergebnisSubtraktion;
 	}
 
 	/* Phelix Plörrking */
