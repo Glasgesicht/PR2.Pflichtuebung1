@@ -64,9 +64,7 @@ public class Polynom {
 		return true;
 	}
 
-	// Formatierte Ausgabe eines Polynoms
-	// Besser wäre eine formattierung des Polynoms als String, der dann z.B. mit Syo
-	// ausgegeben werden kann...
+	// Konvertiert Polynom zu einem String
 	public String toString() {
 		// Wir definieren das Format, in dem die Zahlen ausgeben wollen.
 		// Hier ohne Nachkommestelle, wenn diese X,00 wäre. Sonst bis zu 10
