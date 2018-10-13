@@ -54,7 +54,7 @@ public class Polynom {
 
 	public boolean equals(Polynom a, Polynom b) {
 
-		Polynom test = subtrahiere( b);
+		Polynom test = subtrahiere(b);
 		double[] polynom = test.getKoeffizienten();
 
 		for (double i : polynom) {
@@ -85,23 +85,23 @@ public class Polynom {
 					ausgabe = ausgabe + "+ ";
 				// Ist die Zahl negativ?
 				else if (!this.isPositive(i))
-					ausgabe = ausgabe +"- ";
+					ausgabe = ausgabe + "- ";
 
 				ausgabe = ausgabe + numberFormatted.format(Math.abs(this.getKoeffizient(i)));
 				// Ausgabe ohne nx^1 (= nx) oder nx^0 (= n)
 				if (i > 1)
 					ausgabe = ausgabe + "x^" + i + " ";
 				else if (i == 1)
-					ausgabe = ausgabe +"x ";
+					ausgabe = ausgabe + "x ";
 
 			}
 		}
-		if(isNullpolynom)
+		if (isNullpolynom)
 			return "0";
 		return ausgabe;
 	}
-	
-	public void print(){
+
+	public void print() {
 		System.out.println(this.toString());
 	}
 
@@ -168,14 +168,15 @@ public class Polynom {
 		return ergebnisAddition;
 	}
 
-	public Polynom subtrahiere( Polynom b) {
+	public Polynom subtrahiere(Polynom b) {
 		Polynom ergebnisSubtraktion = new Polynom();
-		
-		for(int i = b.getGrad() - 1; i >= 0; i--) 
-		{b.koeffizient[i] = b.koeffizient[i]*(-1);}
-		
+
+		for (int i = b.getGrad() - 1; i >= 0; i--) {
+			b.koeffizient[i] = b.koeffizient[i] * (-1);
+		}
+
 		this.addierer(b.grad, b, ergebnisSubtraktion);
-		
+
 		return ergebnisSubtraktion;
 	}
 
@@ -196,22 +197,30 @@ public class Polynom {
 	// genutzt zum Testen der Operationen
 	public static void main(String args[]) {
 
-		 System.out.println("Gebe einige Polynome testweise aus:");
-		 Polynom erster = new Polynom(1, -222.5, 0, 0.6, 4, 5, 0, -7);
-		
-		 // Arbeiten mit einem "leeren Polynom"
-		 Polynom zweiter = new Polynom(2, 4, 0, -3, 5.43, -0.5, 1);
-		 Polynom nullpolynom = new Polynom();
-		
-		 erster.print();
-		 zweiter.print();
-		 nullpolynom.print();
+		System.out.println("Gebe einige Polynome testweise aus:");
+		Polynom erster = new Polynom(1, -222.5, 0, 0.6, 4, 5, 0, -7);
 
+		// Arbeiten mit einem "leeren Polynom"
+		Polynom zweiter = new Polynom(2, 4, 0, -3, 5.43, -0.5, 1);
+		Polynom nullpolynom = new Polynom();
+
+		erster.print();
+		zweiter.print();
+		nullpolynom.print();
+		// Zur Aufgabenstellung "Berechne"
 		System.out.println("Berechne Ergebnisse");
-		Polynom eins = new Polynom(5, 0, -2, 0, 9.5 , -8, 5);
-		for (double i : eins.berechne(1, -1, 5,-5)) {
-			System.out.println("" + i);
+		Polynom eins = new Polynom(5, 0, -2, 0, 9.5, -8, 5);
+		for (double i : eins.berechne(1, -1, 5, -5)) {
+			System.out.println(i);
 		}
+		
+		// Zur Aufgabenstelung "Addiere"
+		Polynom addition1 = new Polynom(5,4,-2,3,9.5,8);
+		Polynom addition2 = new Polynom(3,7,6,-6,0,4,7,11);
+		//Das erwartete Ergebnis sollte in etwa so aussehen:
+		//P1(x) + P2(x) = 11x^7 + 7x^6 4x^5 + 9,5x^4 - 3x^3 + 4x^2 + 11x + 8
+		System.out.println(addition1.addiere(addition2).toString()); //sollte so eigentlich funktionieren, oder? :(
+
 	}
 
 }
