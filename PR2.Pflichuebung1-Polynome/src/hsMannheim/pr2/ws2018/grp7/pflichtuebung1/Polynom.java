@@ -5,8 +5,10 @@ import java.text.DecimalFormat;
 public class Polynom {
 
 	// Polynome werden durch double[] realisiert
-	// der double realisiert den koeffizienten, die Wertigkeit ist über die Sortierung im Array bestimmt.
-	// Ein Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n= 0 )
+	// der double realisiert den koeffizienten, die Wertigkeit ist über die
+	// Sortierung im Array bestimmt.
+	// Ein Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n=
+	// 0 )
 	private final double[] koeffizient;
 	private final int grad;
 
@@ -16,8 +18,9 @@ public class Polynom {
 		this.grad = this.koeffizient.length;
 	}
 
-	// Zur vermeidung von fehlern wird ein leeres "Nullpolynom" durch eine einfache 0 realisiert
-	//sollte evtl. geändert werden
+	// Zur vermeidung von fehlern wird ein leeres "Nullpolynom" durch eine einfache
+	// 0 realisiert
+	// sollte evtl. geändert werden
 	Polynom() {
 		this(0);
 	}
@@ -48,30 +51,30 @@ public class Polynom {
 
 		return (Math.abs(this.getKoeffizient(grad)) < 0.0001) ? true : false;
 	}
-	
+
 	public boolean equals(Polynom a, Polynom b) {
 
-		Polynom test = subtrahiere(a,b);
+		Polynom test = subtrahiere(a, b);
 		double[] polynom = test.getKoeffizienten();
 
-		for(double i:polynom) {
-			if(Math.abs(i) > 0.0001)
+		for (double i : polynom) {
+			if (Math.abs(i) > 0.0001)
 				return false;
 		}
 		return true;
 	}
 
 	// Formatierte Ausgabe eines Polynoms
-	// Besser wäre eine formattierung des Polynoms als String, der dann z.B. mit Syo ausgegeben werden kann...
-	public void print() {
+	// Besser wäre eine formattierung des Polynoms als String, der dann z.B. mit Syo
+	// ausgegeben werden kann...
+	public String toString() {
 		// Wir definieren das Format, in dem die Zahlen ausgeben wollen.
 		// Hier ohne Nachkommestelle, wenn diese X,00 wäre. Sonst bis zu 10
 		// Nachkommastellen (darüber wird gerundet)
 		DecimalFormat numberFormatted = new DecimalFormat("0.##########");
-
+		String ausgabe = "";
 		boolean isNullpolynom = true;
 		for (int i = this.getGrad() - 1; i >= 0; i--) {
-			
 
 			// Grade mit der Wertigkeit "0" werden bei der Ausgabe ignoriert
 			if (!this.isNull(i)) {
@@ -81,48 +84,51 @@ public class Polynom {
 				// Ist die Zahl positiv und nicht an erster Stelleß
 				if (this.isPositive(i) && (i != this.getGrad() - 1))
 					// Wir geben ein "+" aus, wenn die Zahl positiv ist.
-					System.out.print("+ ");
+					ausgabe = ausgabe + "+ ";
 				// Ist die Zahl negativ?
 				else if (!this.isPositive(i))
-					System.out.print("- ");
+					ausgabe = ausgabe +"- ";
 
-				System.out.print(numberFormatted.format(Math.abs(this.getKoeffizient(i))));
+				ausgabe = ausgabe + numberFormatted.format(Math.abs(this.getKoeffizient(i)));
 				// Ausgabe ohne nx^1 (= nx) oder nx^0 (= n)
 				if (i > 1)
-					System.out.print("x^" + i + " ");
+					ausgabe = ausgabe + "x^" + i + " ";
 				else if (i == 1)
-					System.out.print("x ");
+					ausgabe = ausgabe +"x ";
 
 			}
 		}
 		if(isNullpolynom)
-			System.out.println("0");
-		else
-			System.out.print("\n");
+			ausgabe = ausgabe + "0";
+		return ausgabe;
+	}
+	
+	public void print(){
+		System.out.println(this.toString());
 	}
 
 	/* Björn */
 	public double[] berechne(double... x) {
 
-		//Die übergebenen X
+		// Die übergebenen X
 		double[] zuBestimmendeX = x;
-		//Hier werden die Ergebnisse gespeiert.
-		//Anzahl der Ergebnisse entspricht der Anzahl der übergebenen X
+		// Hier werden die Ergebnisse gespeiert.
+		// Anzahl der Ergebnisse entspricht der Anzahl der übergebenen X
 		double[] ergebnis = new double[zuBestimmendeX.length];
-		
-		//Loop wird für jedes gegebene X durchlaufen
-		for(int i = 0;i < zuBestimmendeX.length;i++) {
+
+		// Loop wird für jedes gegebene X durchlaufen
+		for (int i = 0; i < zuBestimmendeX.length; i++) {
 
 			double zwischenergebnis = 0;
-			//berechnen des wertes für aktuelles X
-			for(int v = this.getGrad() -1 ;v>=0;v--) {
+			// berechnen des wertes für aktuelles X
+			for (int v = this.getGrad() - 1; v >= 0; v--) {
 				//
-				zwischenergebnis = zwischenergebnis + this.getKoeffizient(v)*(Math.pow(zuBestimmendeX[i],v));
+				zwischenergebnis = zwischenergebnis + this.getKoeffizient(v) * (Math.pow(zuBestimmendeX[i], v));
 			}
 			ergebnis[i] = zwischenergebnis;
 		}
-		
-		return ergebnis; //test
+
+		return ergebnis;
 	}
 
 	/* Elvis Herdbrand */
@@ -153,22 +159,21 @@ public class Polynom {
 	// genutzt zum Testen der Operationen
 	public static void main(String args[]) {
 
+		 System.out.println("Gebe einige Polynome testweise aus:");
+		 Polynom erster = new Polynom(1, -222.5, 0, 0.6, 4, 5, 0, -7);
 		
-//		System.out.println("Gebe einige Polynome testweise aus:");
-//		Polynom erster = new Polynom(1, -222.5, 0, 0.6, 4, 5, 0, -7);
-//
-//		// Arbeiten mit einem "leeren Polynom"
-//		Polynom zweiter = new Polynom(2, 4, 0, -3, 5.43, -0.5, 1);
-//		Polynom nullpolynom = new Polynom();
-//
-//		erster.print();
-//		zweiter.print();
-//		nullpolynom.print();
+		 // Arbeiten mit einem "leeren Polynom"
+		 Polynom zweiter = new Polynom(2, 4, 0, -3, 5.43, -0.5, 1);
+		 Polynom nullpolynom = new Polynom();
 		
+		 erster.print();
+		 zweiter.print();
+		 nullpolynom.print();
+
 		System.out.println("Berechne Ergebnisse");
-		Polynom eins = new Polynom(1,1,1,1,1);
-		for(double i: eins.berechne(10,1)) {
-		System.out.println(" " + i);
+		Polynom eins = new Polynom(1, 1, 1, 1, 1);
+		for (double i : eins.berechne(10, 1)) {
+			System.out.println("" + i);
 		}
 	}
 
