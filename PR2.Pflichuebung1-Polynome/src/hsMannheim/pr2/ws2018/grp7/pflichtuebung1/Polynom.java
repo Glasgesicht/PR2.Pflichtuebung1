@@ -251,7 +251,7 @@ public class Polynom {
 		System.out.println(addition1.addiere(addition2).toString()); //sollte so eigentlich funktionieren, oder? :(
 		
 		
-		//Spielwiese Pörling
+		//Spielwiese Pörling - /
 		System.out.println("\nSpielwiese Pörling:\n");
 //		Polynom diefferenz = new Polynom(10,0,0.5,1,2);
 //		Polynom ergebnisDIF=diefferenz.differenzier();
