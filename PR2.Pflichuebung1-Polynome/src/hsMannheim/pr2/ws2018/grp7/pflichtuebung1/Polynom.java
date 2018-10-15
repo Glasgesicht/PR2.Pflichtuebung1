@@ -1,6 +1,7 @@
 package hsMannheim.pr2.ws2018.grp7.pflichtuebung1;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.concurrent.SynchronousQueue;
 
 public class Polynom {
@@ -239,9 +240,10 @@ public class Polynom {
 		// Zur Aufgabenstellung "Berechne"
 		System.out.println("Berechne Ergebnisse");
 		Polynom eins = new Polynom(5, 0, -2, 0, 9.5, -8, 5);
-		for (double i : eins.berechne(1, -1, 5, -5)) {
-			System.out.println(i);
-		}
+		//for (double i : eins.berechne(1, -1, 5, -5)) {
+		//	System.out.println(i);
+			System.out.println(Arrays.toString(eins.berechne(1,-1,5,-5)));
+		//}
 		
 		// Zur Aufgabenstelung "Addiere"
 		Polynom addition1 = new Polynom(5,4,-2,3,9.5,8);
