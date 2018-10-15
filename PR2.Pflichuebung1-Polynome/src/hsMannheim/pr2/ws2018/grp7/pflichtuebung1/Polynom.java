@@ -68,7 +68,7 @@ public final class Polynom {
 		// Hier ohne Nachkommestelle, wenn diese X,00 wäre. Sonst bis zu 10
 		// Nachkommastellen (darüber wird gerundet)
 		DecimalFormat numbertoString = new DecimalFormat("0.##########");
-		String ausgabe = "";
+		StringBuffer ausgabe = new StringBuffer();
 		boolean isNullpolynom = true;
 		for (int i = this.getGrad() - 1; i >= 0; i--) {
 
@@ -80,23 +80,23 @@ public final class Polynom {
 				// Ist die Zahl positiv und nicht an erster Stelleß
 				if (this.isPositive(i) && (i != this.getGrad() - 1))
 					// Wir geben ein "+" aus, wenn die Zahl positiv ist.
-					ausgabe = ausgabe + "+ ";
+					ausgabe.append("+ ");
 				// Ist die Zahl negativ?
 				else if (!this.isPositive(i))
-					ausgabe = ausgabe + "- ";
+					ausgabe.append("- ");
 
-				ausgabe = ausgabe + numbertoString.format(Math.abs(this.getKoeffizient(i)));
+				ausgabe.append(numbertoString.format(Math.abs(this.getKoeffizient(i))));
 				// Ausgabe ohne nx^1 (= nx) oder nx^0 (= n)
 				if (i > 1)
-					ausgabe = ausgabe + "x^" + i + " ";
+					ausgabe.append("x^" + i + " ");
 				else if (i == 1)
-					ausgabe = ausgabe + "x ";
+					ausgabe.append("x ");
 
 			}
 		}
 		if (isNullpolynom)
 			return "0";
-		return ausgabe;
+		return ausgabe.toString();
 	}
 
 	public void print() {
