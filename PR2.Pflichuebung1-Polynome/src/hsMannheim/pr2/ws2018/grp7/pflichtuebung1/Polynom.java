@@ -29,8 +29,8 @@ public final class Polynom {
 
 	
 	/**
-	 * @param a
-	 * @return
+	 * @param Grad
+	 * @return Koeffizient des Polynoms am Grad
 	 */
 	public double getKoeffizient(int a) {
 
@@ -38,7 +38,7 @@ public final class Polynom {
 	}
 
 	/**
-	 * @return
+	 * @return grad des Polynoms
 	 */
 	public int getGrad() {
 
@@ -69,7 +69,7 @@ public final class Polynom {
 	 * @param Polynom b
 	 * @return boolean
 	 */
-	public boolean equals(Polynom a, Polynom b) {
+	public boolean equals(Polynom b) {
 
 		Polynom test = subtrahiere(b);
 		double[] polynom = test.getKoeffizienten();
@@ -91,12 +91,12 @@ public final class Polynom {
 		// Nachkommastellen (darüber wird gerundet)
 		DecimalFormat numbertoString = new DecimalFormat("0.##########");
 		StringBuffer ausgabe = new StringBuffer();
-		boolean isNullpolynom = true;
+		if (this.getGrad()<=0)
+			return "0";
 		for (int i = this.getGrad() - 1; i >= 0; i--) {
 
 			// Grade mit der Wertigkeit "0" werden bei der Ausgabe ignoriert
 			if (!this.isNull(i)) {
-				isNullpolynom = false;
 				// Formatierte Ausgabe der Elemente unseres Polynoms
 
 				// Ist die Zahl positiv und nicht an erster Stelleß
@@ -116,8 +116,6 @@ public final class Polynom {
 
 			}
 		}
-		if (isNullpolynom)
-			return "0";
 		return ausgabe.toString();
 	}
 
