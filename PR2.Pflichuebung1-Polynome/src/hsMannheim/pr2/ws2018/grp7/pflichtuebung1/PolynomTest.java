@@ -15,7 +15,7 @@ public class PolynomTest {
 	Polynom addsub2 = new Polynom(3,7,6,-6,0,4,7,11);
 	
 	Polynom differenzier = new Polynom(-10,0,0.5,-1,2);
-    
+    Polynom integr = new Polynom(0,1,-3,8);
     
 	@Test
 	public void testBerechnen() {
@@ -41,6 +41,12 @@ public class PolynomTest {
 	public void testDifferenzieren() {
 		
 		assertEquals("Funktion zum differenzieren Fehlerhaft!","[0.0, 1.0, -3.0, 8.0]",Arrays.toString((differenzier.differenzier()).getKoeffizienten()));
+	}
+	
+	@Test
+	public void testIntegrieren() {
+		
+		assertEquals("Funktion zum integrieren Fehlerhaft!","[0.0, 0.0, 0.5, -1.0, 2.0]",Arrays.toString((integr.integrier()).getKoeffizienten()));
 	}
 	
 }
