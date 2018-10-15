@@ -1,6 +1,7 @@
 package hsMannheim.pr2.ws2018.grp7.pflichtuebung1;
 
 import java.text.DecimalFormat;
+import java.util.concurrent.SynchronousQueue;
 
 public class Polynom {
 
@@ -38,7 +39,7 @@ public class Polynom {
 	public int getGrad() {
 
 		return grad;
-	}
+	}//
 
 	// Prüft, ob ein bestimmter koefffizient positiv, oder negativ ist.
 	public boolean isPositive(int grad) {
@@ -181,17 +182,45 @@ public class Polynom {
 	}
 
 	/* Phelix Plörrking */
-
+	//WORKS FINE :)
 	public Polynom differenzier() {
-
-		Polynom ergebnis = new Polynom();
-		return ergebnis;
+		//Erzeuge ein Array mit 1 kleiner als unser Polynom
+	
+		double[] ergebnis = new double[this.getGrad()-1];
+		
+		/*	Schleife um folgendes zu berechnen:
+			An jeder Stelle vom Ursprügnlichem Polynom wird Koeffizient * Grad
+		*/
+		for(int n=0;n<ergebnis.length;n++) {
+			ergebnis[n]=this.koeffizient[n+1]*(n+1);
+		}
+	
+		return new Polynom(ergebnis);
 	}
-
+	
+	
+	//WORKS FINE :) @TODO: Aus +C wird 0 und Null wird im Ausgabestring ignoriert....
 	public Polynom integrier() {
 
-		Polynom ergebnis = new Polynom();
-		return ergebnis;
+		//Erzeuge ein Array mit 1 kleiner als unser Polynom
+		double[] ergebnis = new double[this.getGrad()+1];
+		
+		/*	Schleife um folgendes zu berechnen:
+			An jeder Stelle vom Ursprügnlichem Polynom wird Koeffizient * Grad
+			//		ergebnis[1]=this.koeffizient[0]/1;
+			//		ergebnis[2]=this.koeffizient[1]/2;
+			//		ergebnis[3]=this.koeffizient[2]/3;
+			//		ergebnis[4]=this.koeffizient[3]/4;		
+		*/
+		ergebnis[0]=0;
+		
+		
+		for(int i=1;i<ergebnis.length;i++) {
+			ergebnis[i]=this.koeffizient[i-1]/i;
+		}
+		
+	
+		return new Polynom(ergebnis);
 	}
 
 	// genutzt zum Testen der Operationen
@@ -220,6 +249,22 @@ public class Polynom {
 		//Das erwartete Ergebnis sollte in etwa so aussehen:
 		//P1(x) + P2(x) = 11x^7 + 7x^6 4x^5 + 9,5x^4 - 3x^3 + 4x^2 + 11x + 8
 		System.out.println(addition1.addiere(addition2).toString()); //sollte so eigentlich funktionieren, oder? :(
+		
+		
+		//Spielwiese Pörling
+		System.out.println("\nSpielwiese Pörling:\n");
+//		Polynom diefferenz = new Polynom(10,0,0.5,1,2);
+//		Polynom ergebnisDIF=diefferenz.differenzier();
+//		diefferenz.print();
+//		ergebnisDIF.print();
+		
+		
+		Polynom integrale = new Polynom(0,1,3,8);
+		System.out.println(integrale.getGrad());
+		Polynom ergebnisINTE=integrale.integrier();
+		integrale.print();
+		ergebnisINTE.print();
+		
 
 	}
 
