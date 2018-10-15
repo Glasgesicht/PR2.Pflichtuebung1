@@ -2,17 +2,16 @@ package hsMannheim.pr2.ws2018.grp7.pflichtuebung1;
 
 import java.text.DecimalFormat;
 import java.util.Arrays;
-import java.util.concurrent.SynchronousQueue;
 
-public class Polynom {
+public final class Polynom {
 
 	// Polynome werden durch double[] realisiert
 	// der double realisiert den koeffizienten, die Wertigkeit ist über die
 	// Sortierung im Array bestimmt.
 	// Ein Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n=
 	// 0 )
-	private final double[] koeffizient;
-	private final int grad;
+	private double[] koeffizient;
+	private int grad = -1;
 
 	// Definition eines Polynoms mittel elipse (varargs)
 	Polynom(double... doubles) {
@@ -23,9 +22,6 @@ public class Polynom {
 	// Zur vermeidung von fehlern wird ein leeres "Nullpolynom" durch eine einfache
 	// 0 realisiert
 	// sollte evtl. geändert werden
-	Polynom() {
-		this(0);
-	}
 
 	public double[] getKoeffizienten() {
 
@@ -71,7 +67,7 @@ public class Polynom {
 		// Wir definieren das Format, in dem die Zahlen ausgeben wollen.
 		// Hier ohne Nachkommestelle, wenn diese X,00 wäre. Sonst bis zu 10
 		// Nachkommastellen (darüber wird gerundet)
-		DecimalFormat numberFormatted = new DecimalFormat("0.##########");
+		DecimalFormat numbertoString = new DecimalFormat("0.##########");
 		String ausgabe = "";
 		boolean isNullpolynom = true;
 		for (int i = this.getGrad() - 1; i >= 0; i--) {
@@ -89,7 +85,7 @@ public class Polynom {
 				else if (!this.isPositive(i))
 					ausgabe = ausgabe + "- ";
 
-				ausgabe = ausgabe + numberFormatted.format(Math.abs(this.getKoeffizient(i)));
+				ausgabe = ausgabe + numbertoString.format(Math.abs(this.getKoeffizient(i)));
 				// Ausgabe ohne nx^1 (= nx) oder nx^0 (= n)
 				if (i > 1)
 					ausgabe = ausgabe + "x^" + i + " ";
@@ -242,7 +238,7 @@ public class Polynom {
 		Polynom eins = new Polynom(5, 0, -2, 0, 9.5, -8, 5);
 		//for (double i : eins.berechne(1, -1, 5, -5)) {
 		//	System.out.println(i);
-			System.out.println(Arrays.toString(eins.berechne(1,-1,5,-5)));
+			System.out.println(Arrays.toString(eins.berechne()));
 		//}
 		
 		// Zur Aufgabenstelung "Addiere"
@@ -261,7 +257,7 @@ public class Polynom {
 //		ergebnisDIF.print();
 		
 		
-		Polynom integrale = new Polynom(0,1,3,8);
+		Polynom integrale = new Polynom(6,6,6,6);
 		System.out.println(integrale.getGrad());
 		Polynom ergebnisINTE=integrale.integrier();
 		integrale.print();
@@ -269,5 +265,4 @@ public class Polynom {
 		
 
 	}
-
 }
