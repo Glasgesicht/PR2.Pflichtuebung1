@@ -5,11 +5,11 @@ import java.util.Arrays;
 
 public final class Polynom {
 
-	// Polynome werden durch double[] realisiert
-	// der double realisiert den koeffizienten, die Wertigkeit ist über die
-	// Sortierung im Array bestimmt.
-	// Ein Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n=
-	// 0 )
+/**	 Polynome werden durch double[] realisiert
+	 der double realisiert den koeffizienten, die Wertigkeit ist über die
+	 Sortierung im Array bestimmt.
+	 Ein Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n=
+	 0 ) */
 	private double[] koeffizient;
 	private int grad = -1;
 
@@ -19,37 +19,56 @@ public final class Polynom {
 		this.grad = this.koeffizient.length;
 	}
 
-	// Zur vermeidung von fehlern wird ein leeres "Nullpolynom" durch eine einfache
-	// 0 realisiert
-	// sollte evtl. geändert werden
-
+	/**@return koeffizient
+	 * 
+	 */
 	public double[] getKoeffizienten() {
 
 		return koeffizient;
 	}
 
+	
+	/**
+	 * @param a
+	 * @return
+	 */
 	public double getKoeffizient(int a) {
 
 		return koeffizient[a];
 	}
 
+	/**
+	 * @return
+	 */
 	public int getGrad() {
 
 		return grad;
-	}//
+	}
 
-	// Prüft, ob ein bestimmter koefffizient positiv, oder negativ ist.
+	/**
+	 * Prüft, ob ein bestimmter koefffizient positiv, oder negativ ist.
+	 * @param grad
+	 * @return boolean isPositive
+	 */
 	public boolean isPositive(int grad) {
 
 		return (this.getKoeffizient(grad) >= 0) ? true : false;
 	}
 
-	// Prüft, ob ein definierter grad eines Polynoms null ist.
+	/**Prüft, ob ein definierter grad eines Polynoms null ist.
+	 * @param grad
+	 * @return boolean isNull
+	 */
 	public boolean isNull(int grad) {
 
 		return (Math.abs(this.getKoeffizient(grad)) < 0.0001) ? true : false;
 	}
 
+	/** Prüft, ob zwei Polynome identisch sind
+	 * @param Polynom a
+	 * @param Polynom b
+	 * @return boolean
+	 */
 	public boolean equals(Polynom a, Polynom b) {
 
 		Polynom test = subtrahiere(b);
@@ -62,7 +81,10 @@ public final class Polynom {
 		return true;
 	}
 
-	// Konvertiert Polynom zu einem String
+
+	/** 	Konvertiert Polynom zu einem String
+	 * @return Polynom als String in formattierter Form
+	 */
 	public String toString() {
 		// Wir definieren das Format, in dem die Zahlen ausgeben wollen.
 		// Hier ohne Nachkommestelle, wenn diese X,00 wäre. Sonst bis zu 10
@@ -99,11 +121,19 @@ public final class Polynom {
 		return ausgabe.toString();
 	}
 
+	/** Gibt Polynom formattiert in der Konsole aus
+	 * 
+	 */
 	public void print() {
 		System.out.println(this.toString());
 	}
 
 	/* Björn */
+	/** berechnet die Wertigkeit eines Polynoms bei eingesetzten X-Werten,
+	 * mehere X-Werte möglich
+	 * @param X-Werte
+	 * @return Wert des Polynoms bei eingesetzten X als double[]
+	 */
 	public double[] berechne(double... x) {
 
 		// Die übergebenen X
@@ -180,6 +210,9 @@ public final class Polynom {
 
 	/* Phelix Plörrking */
 	//WORKS FINE :)
+	/** Diffenzieren eines Polynoms
+	 * @return Polynom, differnziert
+	 */
 	public Polynom differenzier() {
 		//Erzeuge ein Array mit 1 kleiner als unser Polynom
 	
@@ -197,6 +230,9 @@ public final class Polynom {
 	
 	
 	//WORKS FINE :) @TODO: Aus +C wird 0 und Null wird im Ausgabestring ignoriert....
+	/** Integrieren eines Polynoms
+	 * @return Polynom, integriert
+	 */
 	public Polynom integrier() {
 
 		//Erzeuge ein Array mit 1 kleiner als unser Polynom
@@ -251,17 +287,18 @@ public final class Polynom {
 		
 		//Spielwiese Pörling - /
 		System.out.println("\nSpielwiese Pörling:\n");
-//		Polynom diefferenz = new Polynom(10,0,0.5,1,2);
-//		Polynom ergebnisDIF=diefferenz.differenzier();
-//		diefferenz.print();
-//		ergebnisDIF.print();
+		Polynom diefferenz = new Polynom(-10,0,0.5,-1,2);
+		Polynom ergebnisDIF=diefferenz.differenzier();
+		System.out.println(Arrays.toString(ergebnisDIF.getKoeffizienten()));
+		diefferenz.print();
+		ergebnisDIF.print();
 		
 		
-		Polynom integrale = new Polynom(6,6,6,6);
-		System.out.println(integrale.getGrad());
-		Polynom ergebnisINTE=integrale.integrier();
-		integrale.print();
-		ergebnisINTE.print();
+//		Polynom integrale = new Polynom(6,6,6,6);
+//		System.out.println(integrale.getGrad());
+//		Polynom ergebnisINTE=integrale.integrier();
+//		integrale.print();
+//		ergebnisINTE.print();
 		
 
 	}
