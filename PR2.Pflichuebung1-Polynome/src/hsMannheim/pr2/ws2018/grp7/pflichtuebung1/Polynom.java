@@ -162,17 +162,17 @@ public final class Polynom {
 	// return this;
 	// }
 
-	private int addierer(int a, Polynom b, ListElement c) {
+	private int addierer(int a, Polynom b, LinearList c) {
 
 		if (a <= 0) {
 
 			for (int i = a - 1; i >= 0; i--) {
 				if (this.getGrad() == i) {
-					c.content = this.koeffizient[this.getGrad()] + b.koeffizient[i];
+					c.addFirst(this.koeffizient[this.getGrad()] + b.koeffizient[i]);  
 				}
 
 			}
-			addierer(a - 1, b, c.next);
+			addierer(a - 1, b, c);
 		}
 		return 0;
 		
@@ -184,7 +184,7 @@ public final class Polynom {
 	public Polynom addiere(Polynom b) {
 		LinearList hilfsliste = new LinearList();
 
-		this.addierer(b.grad, b, hilfsliste.first);
+		this.addierer(b.grad, b, hilfsliste);
 
 		// legacy code
 		// for (int j = this.getGrad() - 1; j >= 0; j--) {
@@ -206,7 +206,7 @@ public final class Polynom {
 			b.koeffizient[i] = b.koeffizient[i] * (-1);
 		}
 
-		this.addierer(b.grad, b, hilfsliste.first);
+		this.addierer(b.grad, b, hilfsliste);
 		
 		Polynom ergebnisSubtraktion = new Polynom(hilfsliste.first.content);
 		return ergebnisSubtraktion;

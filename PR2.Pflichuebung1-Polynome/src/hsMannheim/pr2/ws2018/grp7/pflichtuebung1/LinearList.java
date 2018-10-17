@@ -6,7 +6,7 @@ public class LinearList {
 	
 	public ListElement first;
 	
-	public void addFirst(int value) {
+	public void addFirst(double value) {
 	
 		ListElement n = new ListElement();
 		
