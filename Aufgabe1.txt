@@ -1,0 +1,6 @@
+Wir haben uns bei der Benennung des Packages für "hsMannheim.pr2.ws2018.grp7.pflichtuebung1"entschieden.
+Dabei haben wir uns, bei der Wahl des Package, bzw. der Sub-Packages, einerseits für ein Zwiebelmodell entschieden, welches unsere Gruppe, bzw unsere Abgabe auf logische
+Art und weise von innen (Die Hochschule "hsMannheim", Vorlesung "PR2", Dieses Semester "WS2018", usw...) aufschlüsselt.
+
+Dabei war es uns auch wichtig, nichtnur durch die Nummer unserer Gruppe eindeutig identifizierbar zu sein, als auch auf Dinge wie Matrikelnummer oder Namen zu verzichten,
+da bei Projekten anderer Größenordnung die Partizipanten potenziell ändern könnten.
