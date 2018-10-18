@@ -11,10 +11,10 @@ import org.junit.Test;
 public class PolynomTest {
 	Polynom berechne = new Polynom(5, 0, -2, 0, 9.5, -8, 5);
 	
-	Polynom addsub1 = new Polynom(5,4,-2,3,9.5,8);
+	Polynom addsub1 = new Polynom(5,4,-2,3,9.5,-8);
 	Polynom addsub2 = new Polynom(3,7,6,-6,0,4,7,11);
-	Polynom ergebnisAddier = new Polynom(8.0, 11.0, 4.0, -3.0, 9.5, 4.0, 7.0, 11.0);
-	Polynom ergebnisSubtr = new Polynom(2.0, -3.0, -8.0, 9.0, 9.5, -12.0, -7.0, -11.0);
+	Polynom ergebnisAddier = new Polynom(8.0, 11.0, 4.0, -3.0, 9.5, -4, 7.0, 11.0);
+	Polynom ergebnisSubtr = new Polynom(2.0, -3.0, -8.0, 9.0, 9.5, -12, -7.0, -11.0);
 	
 	Polynom differenzier = new Polynom(-10,0,0.5,-1,2);
 	Polynom ergebnisdiff = new Polynom (0.0, 1.0, -3.0, 8.0);
