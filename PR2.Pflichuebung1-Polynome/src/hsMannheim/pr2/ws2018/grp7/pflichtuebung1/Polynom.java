@@ -162,63 +162,49 @@ public final class Polynom {
 	// return this;
 	// }
 
-	private double[] addierer(int a, Polynom b, double[] c, int j) {
-		
-		if (a <= 0) {
-
-			for (int i = a - 1; i >= 0; i--) {
-				if (this.getGrad() == i) {
-					c[j]=(this.koeffizient[this.getGrad()] + b.koeffizient[i]);
-					j++;
-				}
-
-			}
-			addierer(a - 1, b, c, j);
-		}
-		return c;
-		
+ private void addierer(Polynom a, Polynom b,double[] hilfsarray) {
+	// das erste Array in das Hilfsarray kopieren
+	for (int i = a.getGrad() - 1; i >= 0; i--) {
+		hilfsarray[i]=a.koeffizient[i];	
 	}
-	//private void listToArray(LinearList a, double[] b) {
-	// for()
-		//if(a.first.content != 0) {
-		 
-	// }
-		 
-//	}
-
+	//jede Stelle in dem Hilfsarray mit jeder Stelle aus dem zweiten Polynom addieren
+	for (int i = b.getGrad() - 1; i >= 0; i--) {
+		hilfsarray[i] = hilfsarray[i] + b.koeffizient[i];}
+	}
+			
 	public Polynom addiere(Polynom b) {
-		double[] hilfsarray =null;
-		int hilfszähler =0;
-
-		this.addierer(b.grad, b, hilfsarray, hilfszähler);
-
-		// legacy code
-		// for (int j = this.getGrad() - 1; j >= 0; j--) {
-		// for (int i = a.getGrad() - 1; i >= 0; i--) {
-		// if (this.getGrad() == i) {
-		// ergebnis.koeffizient[this.getGrad()] = this.koeffizient[this.getGrad()] +
-		// a.koeffizient[i];
-		// }
-		// }
-		// }
+		// herausfinden wie groß das Hilfsarray werden muss, um sicher die Polynome fassen zu können
+		 int size = java.lang.Math.max(this.koeffizient.length,b.koeffizient.length);
+		//das Hilfsarray initialisieren
+		double[] hilfsarray ;
+		hilfsarray = new double[size];
+		//die Additionsmethode die private ist, und somit besser geschützt aufrufen
+		addierer(this,b,hilfsarray);
+		
+		// da unser Koeffizient final ist, muss das neue Polynom auf einen Rutsch erstellt werden
 		Polynom ergebnisAddition = new Polynom(hilfsarray);
 		return ergebnisAddition;
 	}
 
 	public Polynom subtrahiere(Polynom b) {
-		double[] hilfsarray = null;
-		int hilfszähler =0;
+		// herausfinden wie groß das Hilfsarray werden muss, um sicher die Polynome fassen zu können 
+		int size = java.lang.Math.max(this.koeffizient.length,b.koeffizient.length);
+			//das Hilfsarray initialisieren
+			double[] hilfsarray ;
+			hilfsarray = new double[size];
+			
 
-
+		//Subtraktion ist gleichwertig mit Addition, wenn der zweite Summand mit -1 multiplitiert wurde
 		for (int i = b.getGrad() - 1; i >= 0; i--) {
 			b.koeffizient[i] = b.koeffizient[i] * (-1);
 		}
 
-		this.addierer(b.grad, b, hilfsarray,hilfszähler);
+		addierer(this,b,hilfsarray);
 		
 		Polynom ergebnisSubtraktion = new Polynom(hilfsarray);
 		return ergebnisSubtraktion;
 	}
+	
 
 	/* Phelix Plörrking */
 	//WORKS FINE :)
@@ -295,7 +281,7 @@ public final class Polynom {
 		//Das erwartete Ergebnis sollte in etwa so aussehen:
 		//P1(x) + P2(x) = 11x^7 + 7x^6 4x^5 + 9,5x^4 - 3x^3 + 4x^2 + 11x + 8
 		System.out.println(addition1.addiere(addition2).toString()); //sollte so eigentlich funktionieren, oder? :(
-		
+		System.out.println(addition1.subtrahiere(addition2).toString());
 		
 		//Spielwiese Pörling - /
 		System.out.println("\nSpielwiese Pörling:\n");
