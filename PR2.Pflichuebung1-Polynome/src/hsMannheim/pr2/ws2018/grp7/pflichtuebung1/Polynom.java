@@ -192,8 +192,6 @@ public final class Polynom {
 			//das Hilfsarray initialisieren
 			double[] hilfsarray ;
 			hilfsarray = new double[size];
-			
-
 		//Subtraktion ist gleichwertig mit Addition, wenn der zweite Summand mit -1 multiplitiert wurde
 		for (int i = b.getGrad() - 1; i >= 0; i--) {
 			b.koeffizient[i] = b.koeffizient[i] * (-1);
