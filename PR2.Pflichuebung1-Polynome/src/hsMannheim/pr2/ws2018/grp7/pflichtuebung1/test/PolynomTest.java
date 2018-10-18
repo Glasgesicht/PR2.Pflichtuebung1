@@ -1,4 +1,4 @@
-package hsMannheim.pr2.ws2018.grp7.pflichtuebung1;
+package hsMannheim.pr2.ws2018.grp7.pflichtuebung1.test;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,8 @@ import java.util.Arrays;
 import org.junit.Test;
 //import static org.junit.jupiter.api.Assertions.*;
 //import org.junit.jupiter.api.Test;
+
+import hsMannheim.pr2.ws2018.grp7.pflichtuebung1.Polynom;
 
 public class PolynomTest {
 	Polynom berechne = new Polynom(5, 0, -2, 0, 9.5, -8, 5);
