@@ -1,7 +1,6 @@
 package hsMannheim.pr2.ws2018.grp7.pflichtuebung1;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 /**
  * @author Philipp Pörling
@@ -11,12 +10,12 @@ import java.util.Arrays;
 public final class Polynom {
 
     /**
-     * Polynome werden durch double[] realisiert. Der double realisiert den
-     * Koeffizienten. Die Wertigkeit ist über die Sortierung im Array bestimmt. Ein
-     * Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n= 0 )
+     * Polynome werden durch double[] realisiert. Jeder Double des arrays bildet
+     * einen koeffizienten. Der Grad ist über die Sortierung im Array bestimmt. 
+     * Ein Grad, der in dem Polynom nicht vorkommt ist als 0 gespeichert ( da 0*x^n= 0 )
      */
-    private double[] koeffizient;
-    private int grad = -1;
+    private final double[] koeffizient;
+    private final int grad;
 
     // Definition eines Polynoms mittel elipse (varargs)
     public Polynom(double... doubles) {
@@ -25,7 +24,7 @@ public final class Polynom {
     }
 
     /**
-     * Gibt alle Koeffizienten des Polynoms als double[] wieder
+     * Gibt alle Koeffizienten des Polynoms als double[] wieder.
      * 
      * @return double[] gibt alle Koeffizienten wieder
      * 
@@ -38,7 +37,7 @@ public final class Polynom {
     /**
      * Gibt definierten Koeffizienten eines Polynoms wieder
      * 
-     * @param grad Grad des Koeffizienten
+     * @param int Grad des Koeffizienten
      * @return double Wert des Koeffizienten
      */
     public double getKoeffizient(int a) {
@@ -47,9 +46,9 @@ public final class Polynom {
     }
 
     /**
-     * Gibt Grad eines Polynoms wieder
+     * Gibt den Grad eines Polynoms wieder
      * 
-     * @return grad Grad des Polynoms
+     * @return int Grad des Polynoms
      */
     public int getGrad() {
 
@@ -59,7 +58,7 @@ public final class Polynom {
     /**
      * Prüft, ob ein bestimmter koefffizient positiv oder negativ ist.
      * 
-     * @param grad Grad des Koeffizienten
+     * @param int Grad des Koeffizienten
      * @return boolean isPositive 
      */
     public boolean isPositive(int grad) {
@@ -82,12 +81,11 @@ public final class Polynom {
      * Prüft, ob zwei Polynome identisch sind
      * 
      * @param Polynom a
-     * @param Polynom b
      * @return boolean
      */
     public boolean equals(Polynom b) {
 
-        Polynom test = subtrahiere(b);
+        Polynom test = this.subtrahiere(b);
         double[] polynom = test.getKoeffizienten();
 
         for (double i : polynom) {
@@ -110,16 +108,14 @@ public final class Polynom {
         DecimalFormat numbertoString = new DecimalFormat("0.##########");
         StringBuffer ausgabe = new StringBuffer();
         boolean nullpolynom = true;
-        if (this.getGrad() <= 0)
-            return "0";
+
         for (int i = this.getGrad() - 1; i >= 0; i--) {
 
             // Grade mit der Wertigkeit "0" werden bei der Ausgabe ignoriert
             if (!this.isNull(i)) {
                 nullpolynom = false;
                 // Formatierte Ausgabe der Elemente unseres Polynoms
-
-                // Ist die Zahl positiv und nicht an erster Stelle
+                // Ist die Zahl positiv und nicht an erster Stelle?
                 if (this.isPositive(i) && (i != this.getGrad() - 1))
                     // Wir geben ein "+" aus, wenn die Zahl positiv ist.
                     ausgabe.append("+ ");
@@ -153,7 +149,7 @@ public final class Polynom {
      * berechnet die Wertigkeit eines Polynoms bei eingesetzten X-Werten, mehere
      * X-Werte möglich
      * 
-     * @param double X-Werte
+     * @param double... X-Werte
      * @return double[] Wert des Polynoms bei eingesetzten X
      */
     public double[] berechne(double... x) {
@@ -238,8 +234,7 @@ public final class Polynom {
         // Erzeuge ein Array mit 1 kleiner als unser Polynom, da beim differenzieren n^1 zu n^0 wird.
 
         double[] ergebnis = new double[this.getGrad() - 1];
-
-        /*         
+        /*
          * Schema: Cx^v, wobei C=Koeffizient, x=x, und v=Exponent, bzw. Grad
          * C'=C*v und ^v-1
          * Jeder Koeffizient vom original Polynom * Grad des Koeffizienten im
@@ -260,11 +255,10 @@ public final class Polynom {
      * @return Polynom, integriert
      */
     public Polynom integrier() {
-
         // Erzeuge ein Array mit 1 größer als unser Polynom, da +C bzw. 0 noch rangehangen wird.
         double[] ergebnis = new double[this.getGrad() + 1];
-
-       /*         
+        
+        /*
          * Schema: Cx^v, wobei C=Koeffizient, x=x, und v=Exponent, bzw. Grad
          * F(x)=C*^v/^v' mit ^v'=^v+1 
          * Jeder Koeffizient vom original Polynom / Grad des Koeffizienten im
