@@ -3,4 +3,4 @@ Dabei haben wir uns, bei der Wahl des Package, bzw. der Sub-Packages, einerseits
 Art und weise von innen (Die Hochschule "hsMannheim", Vorlesung "PR2", Dieses Semester "WS2018", usw...) aufschlüsselt.
 
 Dabei war es uns auch wichtig, nichtnur durch die Nummer unserer Gruppe eindeutig identifizierbar zu sein, als auch auf Dinge wie Matrikelnummer oder Namen zu verzichten,
-da bei Projekten anderer Größenordnung die Partizipanten potenziell ändern könnten.
+da bei Projekten anderer Größenordnung sich die Partizipanten potenziell ändern könnten.
