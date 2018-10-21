@@ -45,12 +45,15 @@ public class TestMain {
         Polynom ztest = new Polynom(5);
         System.out.println("ergebnis:");
         
-        ztest.differenzier().print();
-
-        // Polynom integrale = new Polynom(6,6,6,6);
-        // System.out.println(integrale.getGrad());
-        // Polynom ergebnisINTE=integrale.integrier();
-        // integrale.print();
-        // ergebnisINTE.print();
+        
+        
+        
+        
+        
+        
+        Polynom ergebnisAddier = new Polynom();
+        Polynom ergebnisSubtr = new Polynom(8.0, 11.0, 4.0, -3.0, 9.5, -4, 7.0, 11.0);
+        System.out.println(ergebnisAddier.getGrad());
+        
     }
 }

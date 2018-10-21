@@ -20,7 +20,7 @@ public final class Polynom {
     // Definition eines Polynoms mittel elipse (varargs)
     public Polynom(double... doubles) {
         this.koeffizient = doubles;
-        this.grad = this.koeffizient.length;
+        this.grad = this.koeffizient.length-1;
     }
 
     /**
@@ -108,15 +108,15 @@ public final class Polynom {
         DecimalFormat numbertoString = new DecimalFormat("0.##########");
         StringBuffer ausgabe = new StringBuffer();
         boolean nullpolynom = true;
-
-        for (int i = this.getGrad() - 1; i >= 0; i--) {
+        ausgabe.append("Grad "+(this.getGrad())+": ");
+        for (int i = this.getGrad(); i >= 0; i--) {
 
             // Grade mit der Wertigkeit "0" werden bei der Ausgabe ignoriert
             if (!this.isNull(i)) {
                 nullpolynom = false;
                 // Formatierte Ausgabe der Elemente unseres Polynoms
                 // Ist die Zahl positiv und nicht an erster Stelle?
-                if (this.isPositive(i) && (i != this.getGrad() - 1))
+                if (this.isPositive(i) && (i != this.getGrad()))
                     // Wir geben ein "+" aus, wenn die Zahl positiv ist.
                     ausgabe.append("+ ");
                 // Ist die Zahl negativ?
@@ -165,7 +165,7 @@ public final class Polynom {
 
             double zwischenergebnis = 0;
             // berechnen des wertes für aktuelles X
-            for (int v = this.getGrad() - 1; v >= 0; v--) {
+            for (int v = this.getGrad(); v >= 0; v--) {
                 //
                 zwischenergebnis = zwischenergebnis + this.getKoeffizient(v) * (Math.pow(zuBestimmendeX[i], v));
             }
@@ -188,14 +188,14 @@ public final class Polynom {
         int size = Math.max(this.getGrad(), b.getGrad());
         // das Hilfsarray initialisieren
         double[] hilfsarray;
-        hilfsarray = new double[size];
+        hilfsarray = new double[size+1];
 
-        for (int i = this.getGrad() - 1; i >= 0; i--) {
+        for (int i = this.getGrad(); i >= 0; i--) {
             hilfsarray[i] = this.getKoeffizient(i);
         }
         // jede Stelle in dem Hilfsarray mit jeder Stelle aus dem zweiten Polynom
         // addieren
-        for (int i = b.getGrad() - 1; i >= 0; i--) {
+        for (int i = b.getGrad(); i >= 0; i--) {
             hilfsarray[i] = hilfsarray[i] + b.getKoeffizient(i);
         }
 
@@ -215,10 +215,10 @@ public final class Polynom {
     public Polynom subtrahiere(Polynom b) {
 
         // Erstelle Hilfsarray mit der Länge des Polynom B
-        double[] hilfsarray = new double[b.getGrad()];
+        double[] hilfsarray = new double[b.getGrad()+1];
 
         // Schleife, die das Polymon b negiert im Hilfsarray speichert
-        for (int i = 0; i < b.getGrad(); i++)
+        for (int i = 0; i <= b.getGrad(); i++)
             hilfsarray[i] = b.getKoeffizient(i) * (-1);
 
         // Polynom "this" addiert mit negiertem Polynom b
@@ -233,7 +233,7 @@ public final class Polynom {
     public Polynom differenzier() {
         // Erzeuge ein Array mit 1 kleiner als unser Polynom, da beim differenzieren n^1 zu n^0 wird.
 
-        double[] ergebnis = new double[this.getGrad() - 1];
+        double[] ergebnis = new double[this.getGrad()];
         /*
          * Schema: Cx^v, wobei C=Koeffizient, x=x, und v=Exponent, bzw. Grad
          * C'=C*v und ^v-1
@@ -256,7 +256,7 @@ public final class Polynom {
      */
     public Polynom integrier() {
         // Erzeuge ein Array mit 1 größer als unser Polynom, da +C bzw. 0 noch rangehangen wird.
-        double[] ergebnis = new double[this.getGrad() + 1];
+        double[] ergebnis = new double[this.getGrad() + 2];
         
         /*
          * Schema: Cx^v, wobei C=Koeffizient, x=x, und v=Exponent, bzw. Grad
